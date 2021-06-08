@@ -33,6 +33,6 @@ export default class Snake {
 
   update(time) {
     this.body[0].x += this.direction.x;
-    this.body[0].x += this.direction.y;
+    this.body[0].y += this.direction.y;
   }
 }

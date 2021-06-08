@@ -7,4 +7,4 @@ const config = {
   scene: [MainScene],
 };
 
-new Phaser.GAME(config);
+new Phaser.Game(config);
