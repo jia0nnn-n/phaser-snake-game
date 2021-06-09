@@ -18,9 +18,9 @@ export default class Snake {
         .setOrigin(0)
     );
     this.apple = this.scene.add
-    .rectangle(0, 0, this.tileSize, this.tileSize, 0x00ff00)
-    .setOrigin(0);
-    this.generateRandomPositionApples()
+      .rectangle(0, 0, this.tileSize, this.tileSize, 0x00ff00)
+      .setOrigin(0);
+    this.generateRandomPositionApples();
 
     scene.input.keyboard.on("keydown", (e) => this.handleKeydown(e));
   }
@@ -63,11 +63,24 @@ export default class Snake {
   }
 
   move() {
+    let x = this.body[0].x + this.direction.x * this.tileSize;
+    let y = this.body[0].y + this.direction.y * this.tileSize;
+
+    // Comes to apple
+    if (this.apple.x === x && this.apple.y === y) {
+      this.body.push(
+        this.scene.add
+          .rectangle(0, 0, this.tileSize, this.tileSize, 0xffffff)
+          .setOrigin(0)
+      );
+      this.generateRandomPositionApples();
+    }
+
     for (let index = this.body.length - 1; index > 0; index--) {
       this.body[index].x = this.body[index - 1].x;
       this.body[index].y = this.body[index - 1].y;
     }
-    this.body[0].x += this.direction.x * 16;
-    this.body[0].y += this.direction.y * 16;
+    this.body[0].x = x;
+    this.body[0].y = y;
   }
 }
