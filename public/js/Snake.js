@@ -83,14 +83,20 @@ export default class Snake {
     this.body[0].x = x;
     this.body[0].y = y;
 
-
-    // if the snake head is out of scene, restart the game
+    // DIE CASE: if the snake head is out of scene, restart the game
     if (
       this.body[0].x < 0 ||
       this.body[0].x > this.scene.game.config.width ||
       this.body[0].y < 0 ||
       this.body[0].y > this.scene.game.config.height
     ) {
+      this.scene.scene.restart();
+    }
+
+    // DIE CASE: snake eats its body
+    let tail = this.body.slice(1);
+
+    if (tail.some((t) => t.x === this.body[0].x && t.y === this.body[0].y)) {
       this.scene.scene.restart();
     }
   }
