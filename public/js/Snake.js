@@ -2,7 +2,7 @@ export default class Snake {
   constructor(scene) {
     this.scene = scene;
     this.lastMoveTime = 0;
-    this.moveInterval = 100;
+    this.moveInterval = 50;
     this.direction = Phaser.Math.Vector2.RIGHT;
     this.tileSize = 16;
     this.body = [];
@@ -82,5 +82,16 @@ export default class Snake {
     }
     this.body[0].x = x;
     this.body[0].y = y;
+
+
+    // if the snake head is out of scene, restart the game
+    if (
+      this.body[0].x < 0 ||
+      this.body[0].x > this.scene.game.config.width ||
+      this.body[0].y < 0 ||
+      this.body[0].y > this.scene.game.config.height
+    ) {
+      this.scene.scene.restart();
+    }
   }
 }
